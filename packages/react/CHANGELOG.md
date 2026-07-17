@@ -1,5 +1,21 @@
 # @bidikit/react
 
+## 1.1.1
+
+### Patch Changes
+
+- Add `LanguageSwitcher` and `LanguageSwitcherRoot` components
+
+  - `<LanguageSwitcher />` — pre-built drop-in switcher with three variants:
+    - `pill` (default) — segmented pill button group
+    - `dropdown` — native `<select>` element
+    - `minimal` — plain text button that cycles through languages
+  - `display` prop controls label format: `native`, `english`, `code`, `flag`, `flag+native`, `flag+code`
+  - `<LanguageSwitcherRoot>` — headless render-prop component for fully custom UI
+  - Built-in language name + flag lookup for 16 languages (AR, EN, FR, DE, ES, HE, FA, UR, ZH, JA, KO, PT, RU, TR, NL, IT)
+  - `onLanguageChange` callback prop
+  - Fully typed, accessible (`aria-pressed`, `aria-label`, `role="group"`)
+
 ## 1.1.0
 
 ### Minor Changes

@@ -46,6 +46,9 @@ export {
   Navbar,
   Sidebar,
   BidiImage,
+  // Language switcher — pre-built and headless variants
+  LanguageSwitcher,
+  LanguageSwitcherRoot,
 } from "./components.js";
 export type {
   RowProps,
@@ -61,6 +64,10 @@ export type {
   NavbarProps,
   SidebarProps,
   BidiImageProps,
+  LanguageSwitcherProps,
+  LanguageSwitcherRootProps,
+  LanguageSwitcherVariant,
+  LanguageSwitcherDisplay,
 } from "./components.js";
 
 // Re-export core types that React consumers commonly need

@@ -1,5 +1,13 @@
 # bidikit-example-next-app
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @bidikit/react@1.1.1
+  - @bidikit/next@1.1.1
+
 ## 0.0.1
 
 ### Patch Changes

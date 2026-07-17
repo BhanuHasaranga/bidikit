@@ -577,3 +577,271 @@ export const BidiImage = forwardRef<HTMLImageElement, BidiImageProps>(
   },
 );
 BidiImage.displayName = "BidiImage";
+
+// ─────────────────────────────────────────────
+// LanguageSwitcherRoot — headless, for custom buttons
+// ─────────────────────────────────────────────
+
+import { useLanguage } from "./hooks.js";
+
+export interface LanguageSwitcherRootProps {
+  /**
+   * Render prop — receives state and actions, returns your custom UI.
+   *
+   * @example
+   * <LanguageSwitcherRoot>
+   *   {({ language, languages, setLanguage }) => (
+   *     <select value={language} onChange={e => setLanguage(e.target.value)}>
+   *       {languages.map(l => <option key={l} value={l}>{l}</option>)}
+   *     </select>
+   *   )}
+   * </LanguageSwitcherRoot>
+   */
+  children: (props: {
+    language: string;
+    languages: string[];
+    setLanguage: (lang: string) => void;
+    toggleLanguage: (pair?: [string, string]) => void;
+    isRTL: boolean;
+  }) => React.ReactNode;
+}
+
+/**
+ * Headless language switcher — bring your own UI.
+ * Wires up language state and gives you full control over rendering.
+ *
+ * @example
+ * <LanguageSwitcherRoot>
+ *   {({ language, languages, setLanguage }) => (
+ *     <button onClick={() => setLanguage(language === "en" ? "ar" : "en")}>
+ *       {language === "en" ? "العربية" : "English"}
+ *     </button>
+ *   )}
+ * </LanguageSwitcherRoot>
+ */
+export function LanguageSwitcherRoot({ children }: LanguageSwitcherRootProps) {
+  const { language, supportedLanguages, setLanguage, toggleLanguage } = useLanguage();
+  const isRTL = useRTL();
+  return (
+    <>
+      {children({
+        language,
+        languages: supportedLanguages,
+        setLanguage,
+        toggleLanguage,
+        isRTL,
+      })}
+    </>
+  );
+}
+LanguageSwitcherRoot.displayName = "LanguageSwitcherRoot";
+
+// ─────────────────────────────────────────────
+// LanguageSwitcher — ready-to-use switcher component
+// ─────────────────────────────────────────────
+
+/** Display names for known language codes */
+const LANGUAGE_NAMES: Record<string, { native: string; english: string; flag: string }> = {
+  en: { native: "English",    english: "English",  flag: "🇬🇧" },
+  ar: { native: "العربية",   english: "Arabic",   flag: "🇸🇦" },
+  fr: { native: "Français",   english: "French",   flag: "🇫🇷" },
+  de: { native: "Deutsch",    english: "German",   flag: "🇩🇪" },
+  es: { native: "Español",    english: "Spanish",  flag: "🇪🇸" },
+  he: { native: "עברית",     english: "Hebrew",   flag: "🇮🇱" },
+  fa: { native: "فارسی",     english: "Persian",  flag: "🇮🇷" },
+  ur: { native: "اردو",      english: "Urdu",     flag: "🇵🇰" },
+  zh: { native: "中文",       english: "Chinese",  flag: "🇨🇳" },
+  ja: { native: "日本語",     english: "Japanese", flag: "🇯🇵" },
+  ko: { native: "한국어",     english: "Korean",   flag: "🇰🇷" },
+  pt: { native: "Português",  english: "Portuguese", flag: "🇵🇹" },
+  ru: { native: "Русский",   english: "Russian",  flag: "🇷🇺" },
+  tr: { native: "Türkçe",    english: "Turkish",  flag: "🇹🇷" },
+  nl: { native: "Nederlands", english: "Dutch",    flag: "🇳🇱" },
+  it: { native: "Italiano",   english: "Italian",  flag: "🇮🇹" },
+};
+
+function getLangLabel(
+  code: string,
+  display: "native" | "english" | "code" | "flag" | "flag+native" | "flag+code",
+): string {
+  const info = LANGUAGE_NAMES[code];
+  if (!info) return code.toUpperCase();
+  switch (display) {
+    case "native":       return info.native;
+    case "english":      return info.english;
+    case "code":         return code.toUpperCase();
+    case "flag":         return info.flag;
+    case "flag+native":  return `${info.flag} ${info.native}`;
+    case "flag+code":    return `${info.flag} ${code.toUpperCase()}`;
+  }
+}
+
+export type LanguageSwitcherVariant = "pill" | "dropdown" | "minimal";
+export type LanguageSwitcherDisplay = "native" | "english" | "code" | "flag" | "flag+native" | "flag+code";
+
+export interface LanguageSwitcherProps {
+  /**
+   * Visual style of the switcher.
+   * - `pill`     — segmented pill buttons (default)
+   * - `dropdown` — native <select> element
+   * - `minimal`  — plain text button, just the current language
+   */
+  variant?: LanguageSwitcherVariant;
+  /**
+   * What label to show for each language.
+   * - `native`      — "العربية", "English" (default)
+   * - `english`     — always in English: "Arabic", "English"
+   * - `code`        — "AR", "EN"
+   * - `flag`        — "🇸🇦", "🇬🇧"
+   * - `flag+native` — "🇸🇦 العربية"
+   * - `flag+code`   — "🇸🇦 AR"
+   */
+  display?: LanguageSwitcherDisplay;
+  /** Additional className */
+  className?: string;
+  /** Additional inline styles for the root element */
+  style?: CSSProperties;
+  /** Called after language is changed */
+  onLanguageChange?: (language: string) => void;
+}
+
+/**
+ * Pre-built language switcher component.
+ * Drop it anywhere inside `<BidiProvider>` — no props required.
+ *
+ * @example
+ * // Pill toggle (default)
+ * <LanguageSwitcher />
+ *
+ * @example
+ * // Dropdown with flag + native name
+ * <LanguageSwitcher variant="dropdown" display="flag+native" />
+ *
+ * @example
+ * // Minimal button cycling through languages
+ * <LanguageSwitcher variant="minimal" display="flag+code" />
+ */
+export const LanguageSwitcher = forwardRef<HTMLDivElement, LanguageSwitcherProps>(
+  (
+    {
+      variant = "pill",
+      display = "native",
+      className,
+      style,
+      onLanguageChange,
+    },
+    ref,
+  ) => {
+    const { language, supportedLanguages, setLanguage, toggleLanguage } = useLanguage();
+
+    const handleSet = (lang: string) => {
+      setLanguage(lang);
+      onLanguageChange?.(lang);
+    };
+
+    // ── Pill variant ──────────────────────────────────
+    if (variant === "pill") {
+      return (
+        <div
+          ref={ref}
+          className={className}
+          style={mergeStyles(
+            {
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "4px",
+              padding: "4px",
+              borderRadius: "999px",
+              background: "rgba(0,0,0,0.08)",
+              border: "1px solid rgba(0,0,0,0.12)",
+            },
+            style,
+          )}
+          role="group"
+          aria-label="Language switcher"
+        >
+          {supportedLanguages.map((lang) => (
+            <button
+              key={lang}
+              type="button"
+              onClick={() => handleSet(lang)}
+              aria-pressed={lang === language}
+              aria-label={`Switch to ${LANGUAGE_NAMES[lang]?.english ?? lang}`}
+              style={{
+                padding: "6px 14px",
+                borderRadius: "999px",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "13px",
+                fontWeight: 600,
+                lineHeight: 1,
+                transition: "all 0.2s ease",
+                background: lang === language ? "var(--bidi-accent, #6366f1)" : "transparent",
+                color: lang === language ? "#fff" : "inherit",
+                opacity: lang === language ? 1 : 0.65,
+              }}
+            >
+              {getLangLabel(lang, display)}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    // ── Dropdown variant ──────────────────────────────
+    if (variant === "dropdown") {
+      return (
+        <div ref={ref} className={className} style={style}>
+          <select
+            value={language}
+            onChange={(e) => handleSet(e.target.value)}
+            aria-label="Language switcher"
+            style={{
+              padding: "8px 12px",
+              borderRadius: "8px",
+              border: "1px solid rgba(0,0,0,0.2)",
+              background: "transparent",
+              color: "inherit",
+              fontSize: "14px",
+              fontWeight: 500,
+              cursor: "pointer",
+              fontFamily: "inherit",
+            }}
+          >
+            {supportedLanguages.map((lang) => (
+              <option key={lang} value={lang}>
+                {getLangLabel(lang, display)}
+              </option>
+            ))}
+          </select>
+        </div>
+      );
+    }
+
+    // ── Minimal variant ───────────────────────────────
+    return (
+      <div ref={ref} className={className} style={style}>
+        <button
+          type="button"
+          onClick={() => toggleLanguage()}
+          aria-label="Toggle language"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "inherit",
+            padding: "4px 8px",
+            borderRadius: "6px",
+            fontFamily: "inherit",
+          }}
+        >
+          {getLangLabel(language, display)}
+        </button>
+      </div>
+    );
+  },
+);
+LanguageSwitcher.displayName = "LanguageSwitcher";
+
