@@ -1,7 +1,7 @@
 {
   "name": "@bidikit/react",
   "version": "1.1.1",
-  "description": "React hooks and components for BidiKit — RTL/LTR direction-aware UI",
+  "description": "React hooks and components for BidiKit - RTL/LTR direction-aware UI",
   "keywords": [
     "rtl",
     "ltr",

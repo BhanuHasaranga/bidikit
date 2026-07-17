@@ -99,11 +99,11 @@ export async function syncCommand(_args: string[]): Promise<void> {
     const missing = getMissingKeys(en, target);
 
     if (missing.length === 0) {
-      step(`${colors.green("✓")} ${lang}.json — up to date`);
+      step(`${colors.green("✓")} ${lang}.json - up to date`);
     } else {
       const filled = fillMissing(en, target, lang);
       writeJSON(targetPath, filled);
-      step(`${colors.yellow("~")} ${lang}.json — added ${missing.length} missing keys`);
+      step(`${colors.yellow("~")} ${lang}.json - added ${missing.length} missing keys`);
       totalSynced += missing.length;
     }
   }

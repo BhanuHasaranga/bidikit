@@ -1,6 +1,6 @@
 # @bidikit/tailwind
 
-> Tailwind CSS plugin for BidiKit — logical properties, `rtl:` / `ltr:` variants.
+> Tailwind CSS plugin for BidiKit - logical properties, `rtl:` / `ltr:` variants.
 
 [![npm](https://img.shields.io/npm/v/@bidikit/tailwind?style=flat-square)](https://www.npmjs.com/package/@bidikit/tailwind)
 

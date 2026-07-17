@@ -63,7 +63,7 @@ export function getDirection(
 }
 
 /**
- * DirectionManager — handles all DOM direction side-effects.
+ * DirectionManager - handles all DOM direction side-effects.
  */
 export class DirectionManager {
   private readonly rtlLanguages: ReadonlySet<LanguageCode>;

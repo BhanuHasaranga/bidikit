@@ -47,7 +47,7 @@ const bidiConfig: BidiConfig = {
           },
           components: {
             title: "Direction-aware Components",
-            desc: "Row, Column, Navbar, Sidebar, Button, Icon and more — all RTL-aware.",
+            desc: "Row, Column, Navbar, Sidebar, Button, Icon and more - all RTL-aware.",
           },
         },
       },
@@ -87,7 +87,7 @@ const bidiConfig: BidiConfig = {
           },
           components: {
             title: "مكونات واعية بالاتجاه",
-            desc: "Row و Column و Navbar و Sidebar و Button و Icon والمزيد — كلها تدعم RTL.",
+            desc: "Row و Column و Navbar و Sidebar و Button و Icon والمزيد - كلها تدعم RTL.",
           },
         },
       },
@@ -127,7 +127,7 @@ const bidiConfig: BidiConfig = {
           },
           components: {
             title: "Composants directionnels",
-            desc: "Row, Column, Navbar, Sidebar, Button, Icon et plus — tous compatibles RTL.",
+            desc: "Row, Column, Navbar, Sidebar, Button, Icon et plus - tous compatibles RTL.",
           },
         },
       },

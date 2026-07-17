@@ -1,7 +1,7 @@
 {
   "name": "@bidikit/core",
   "version": "1.1.0",
-  "description": "Zero-dependency RTL/LTR engine — The missing layer for bidirectional web applications",
+  "description": "Zero-dependency RTL/LTR engine - The missing layer for bidirectional web applications",
   "keywords": [
     "rtl",
     "ltr",

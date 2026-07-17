@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view *)",
+      "Bash(netlify --version)",
+      "Bash(grep -n '```' -A2 README.md)",
+      "Bash(git ls-remote *)",
+      "Bash(mkdir -p \"d:/Projects/bidikit-web\")",
+      "Bash(npm -v)",
+      "Bash(npm init *)",
+      "Bash(curl -sI http://localhost:3000/ar)",
+      "Bash(curl -sI http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(netlify init *)",
+      "Bash(netlify sites:create --name bidikit-web --disable-linking)",
+      "Bash(curl -s https://bidikit-web.netlify.app/)",
+      "Bash(curl -s https://bidikit-web.netlify.app/ar)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://bidikit-web.netlify.app/sitemap.xml)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://bidikit-web.netlify.app/robots.txt)",
+      "Bash(curl -s http://localhost:3002/)",
+      "Bash(curl -s http://localhost:3002/ar)",
+      "Bash(curl -s -o /dev/null -w \"sitemap: %{http_code}\\\\n\" https://bidikit-web.netlify.app/sitemap.xml)",
+      "Bash(curl -s -o /dev/null -w \"robots: %{http_code}\\\\n\" https://bidikit-web.netlify.app/robots.txt)",
+      "Bash(nslookup bidikit.com)",
+      "Bash(nslookup bidikit.com 8.8.8.8)",
+      "Bash(curl -s -o /dev/null -w \"http status: %{http_code}\\\\n\" http://bidikit.com/)",
+      "Bash(curl -s http://bidikit.com/)",
+      "Bash(curl -s http://bidikit.com/ar)"
+    ],
+    "additionalDirectories": [
+      "d:\\Projects\\bidikit-web",
+      "d:\\Projects\\bidikit-web\\src"
+    ]
+  }
+}

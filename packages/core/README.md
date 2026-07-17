@@ -1,6 +1,6 @@
 # @bidikit/core
 
-> Zero-dependency RTL/LTR engine — The missing layer for bidirectional web applications.
+> Zero-dependency RTL/LTR engine - The missing layer for bidirectional web applications.
 
 [![npm](https://img.shields.io/npm/v/@bidikit/core?style=flat-square)](https://www.npmjs.com/package/@bidikit/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](../../LICENSE)
@@ -13,11 +13,11 @@ npm install @bidikit/core
 
 ## Features
 
-- **LanguageManager** — detect, set, persist, toggle, sync language
-- **DirectionManager** — auto-update `document.dir`, `lang`, CSS variables
-- **TranslationEngine** — nested keys, pluralization, interpolation, fallback
-- **RTLEngine** — CSS logical property helpers, icon mirror maps
-- **StorageAdapter** — localStorage, cookie, sessionStorage, URL, subdomain, callback
+- **LanguageManager** - detect, set, persist, toggle, sync language
+- **DirectionManager** - auto-update `document.dir`, `lang`, CSS variables
+- **TranslationEngine** - nested keys, pluralization, interpolation, fallback
+- **RTLEngine** - CSS logical property helpers, icon mirror maps
+- **StorageAdapter** - localStorage, cookie, sessionStorage, URL, subdomain, callback
 
 ## Quick Start
 

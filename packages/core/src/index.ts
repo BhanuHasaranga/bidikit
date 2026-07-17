@@ -1,7 +1,7 @@
 /**
  * @bidikit/core
  *
- * Zero-dependency RTL/LTR engine — The missing layer for bidirectional web applications.
+ * Zero-dependency RTL/LTR engine - The missing layer for bidirectional web applications.
  *
  * @packageDocumentation
  */

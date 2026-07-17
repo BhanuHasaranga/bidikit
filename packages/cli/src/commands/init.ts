@@ -71,7 +71,7 @@ export async function initCommand(_args: string[]): Promise<void> {
   // 1. bidikit.config.ts
   const configPath = join(root, "bidikit.config.ts");
   if (fileExists(configPath)) {
-    warn(`bidikit.config.ts already exists — skipping`);
+    warn(`bidikit.config.ts already exists - skipping`);
   } else {
     writeFile(configPath, CONFIG_TEMPLATE);
     step(`Created ${colors.cyan("bidikit.config.ts")}`);
@@ -84,7 +84,7 @@ export async function initCommand(_args: string[]): Promise<void> {
   // English
   const enPath = join(translationsDir, "en.json");
   if (fileExists(enPath)) {
-    warn(`translations/en.json already exists — skipping`);
+    warn(`translations/en.json already exists - skipping`);
   } else {
     writeJSON(enPath, EN_TRANSLATIONS);
     step(`Created ${colors.cyan("translations/en.json")}`);
@@ -94,7 +94,7 @@ export async function initCommand(_args: string[]): Promise<void> {
   // Arabic
   const arPath = join(translationsDir, "ar.json");
   if (fileExists(arPath)) {
-    warn(`translations/ar.json already exists — skipping`);
+    warn(`translations/ar.json already exists - skipping`);
   } else {
     writeJSON(arPath, AR_TRANSLATIONS);
     step(`Created ${colors.cyan("translations/ar.json")}`);

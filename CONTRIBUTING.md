@@ -52,11 +52,11 @@ bidikit/
 ## Development Workflow
 
 ### Branch naming
-- `feat/feature-name` — new features
-- `fix/bug-description` — bug fixes
-- `docs/topic` — documentation updates
-- `refactor/description` — refactoring
-- `test/description` — test additions
+- `feat/feature-name` - new features
+- `fix/bug-description` - bug fixes
+- `docs/topic` - documentation updates
+- `refactor/description` - refactoring
+- `test/description` - test additions
 
 ### Commit Messages (Conventional Commits)
 

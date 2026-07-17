@@ -49,7 +49,7 @@ export const BidiContext = createContext<BidiContextValue | undefined>(undefined
 BidiContext.displayName = "BidiContext";
 
 /**
- * Internal hook to consume BidiContext — throws if used outside BidiProvider.
+ * Internal hook to consume BidiContext - throws if used outside BidiProvider.
  */
 export function useBidiContext(): BidiContextValue {
   const ctx = useContext(BidiContext);

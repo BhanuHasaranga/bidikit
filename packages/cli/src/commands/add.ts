@@ -52,7 +52,7 @@ export async function addCommand(args: string[]): Promise<void> {
 
   // Check if already exists
   if (fileExists(targetPath)) {
-    warn(`translations/${language}.json already exists — skipping`);
+    warn(`translations/${language}.json already exists - skipping`);
     return;
   }
 

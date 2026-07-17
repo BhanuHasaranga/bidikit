@@ -20,7 +20,7 @@ import type {
 } from "./types.js";
 
 /**
- * BidiKit — the central facade.
+ * BidiKit - the central facade.
  *
  * Composes LanguageManager and TranslationEngine into a single,
  * easy-to-use API.

@@ -1,7 +1,7 @@
 {
   "name": "@bidikit/next",
   "version": "1.1.1",
-  "description": "Next.js integration for BidiKit — SSR, middleware, SEO, App Router support",
+  "description": "Next.js integration for BidiKit - SSR, middleware, SEO, App Router support",
   "keywords": [
     "rtl",
     "ltr",

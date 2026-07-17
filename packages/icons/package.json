@@ -1,7 +1,7 @@
 {
   "name": "@bidikit/icons",
   "version": "1.1.1",
-  "description": "Icon mirroring utilities for BidiKit — auto-flip directional icons in RTL",
+  "description": "Icon mirroring utilities for BidiKit - auto-flip directional icons in RTL",
   "keywords": [
     "rtl",
     "ltr",

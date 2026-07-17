@@ -20,7 +20,7 @@ export interface LanguageManagerOptions {
 }
 
 /**
- * LanguageManager — the central state manager for language and direction.
+ * LanguageManager - the central state manager for language and direction.
  *
  * @example
  * const manager = new LanguageManager({ config });

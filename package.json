@@ -2,7 +2,7 @@
   "name": "bidikit-monorepo",
   "version": "0.0.0",
   "private": true,
-  "description": "BidiKit monorepo — The missing layer for RTL & LTR web applications",
+  "description": "BidiKit monorepo - The missing layer for RTL & LTR web applications",
   "packageManager": "pnpm@9.14.2",
   "engines": {
     "node": ">=18.0.0",

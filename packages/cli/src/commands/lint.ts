@@ -58,7 +58,7 @@ export async function lintCommand(_args: string[]): Promise<void> {
     const translations = readJSON<Record<string, unknown>>(filePath);
 
     if (!translations) {
-      step(`${colors.red("✗")} ${file} — invalid JSON`);
+      step(`${colors.red("✗")} ${file} - invalid JSON`);
       totalErrors++;
       continue;
     }
@@ -69,7 +69,7 @@ export async function lintCommand(_args: string[]): Promise<void> {
     const extra = lang !== "en" ? [...fileKeys].filter((k) => !enKeys.has(k)) : [];
 
     if (missing.length === 0 && extra.length === 0) {
-      step(`${colors.green("✓")} ${file} — ${fileKeys.size} keys, all good`);
+      step(`${colors.green("✓")} ${file} - ${fileKeys.size} keys, all good`);
     } else {
       step(`${colors.yellow("~")} ${file}`);
 

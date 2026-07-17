@@ -12,7 +12,7 @@
 }
 
 html {
-  /* Default direction — overridden by BidiKit's DirectionManager */
+  /* Default direction - overridden by BidiKit's DirectionManager */
   direction: ltr;
   -webkit-text-size-adjust: 100%;
   tab-size: 4;

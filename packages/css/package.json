@@ -1,7 +1,7 @@
 {
   "name": "@bidikit/css",
   "version": "1.1.0",
-  "description": "Pure CSS utilities for BidiKit — zero-JS RTL/LTR logical property helpers",
+  "description": "Pure CSS utilities for BidiKit - zero-JS RTL/LTR logical property helpers",
   "keywords": [
     "rtl",
     "ltr",

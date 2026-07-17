@@ -25,7 +25,7 @@ function mergeStyles(...styles: (CSSProperties | undefined)[]): CSSProperties {
 }
 
 // ─────────────────────────────────────────────
-// Row — direction-aware horizontal flex container
+// Row - direction-aware horizontal flex container
 // ─────────────────────────────────────────────
 
 export interface RowProps extends HTMLAttributes<HTMLDivElement> {
@@ -109,7 +109,7 @@ export const Column = forwardRef<HTMLDivElement, ColumnProps>(
 Column.displayName = "Column";
 
 // ─────────────────────────────────────────────
-// Stack — auto direction-aware (Row on desktop, Column on mobile)
+// Stack - auto direction-aware (Row on desktop, Column on mobile)
 // ─────────────────────────────────────────────
 
 export interface StackProps extends HTMLAttributes<HTMLDivElement> {
@@ -119,7 +119,7 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Direction-aware stack — defaults to row.
+ * Direction-aware stack - defaults to row.
  *
  * @example
  * <Stack direction="row" gap={8}>...</Stack>
@@ -403,7 +403,7 @@ export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Avatar component — shows image or initials.
+ * Avatar component - shows image or initials.
  *
  * @example
  * <Avatar src="/avatar.jpg" alt="User" size={40} />
@@ -579,14 +579,14 @@ export const BidiImage = forwardRef<HTMLImageElement, BidiImageProps>(
 BidiImage.displayName = "BidiImage";
 
 // ─────────────────────────────────────────────
-// LanguageSwitcherRoot — headless, for custom buttons
+// LanguageSwitcherRoot - headless, for custom buttons
 // ─────────────────────────────────────────────
 
 import { useLanguage } from "./hooks.js";
 
 export interface LanguageSwitcherRootProps {
   /**
-   * Render prop — receives state and actions, returns your custom UI.
+   * Render prop - receives state and actions, returns your custom UI.
    *
    * @example
    * <LanguageSwitcherRoot>
@@ -607,7 +607,7 @@ export interface LanguageSwitcherRootProps {
 }
 
 /**
- * Headless language switcher — bring your own UI.
+ * Headless language switcher - bring your own UI.
  * Wires up language state and gives you full control over rendering.
  *
  * @example
@@ -637,7 +637,7 @@ export function LanguageSwitcherRoot({ children }: LanguageSwitcherRootProps) {
 LanguageSwitcherRoot.displayName = "LanguageSwitcherRoot";
 
 // ─────────────────────────────────────────────
-// LanguageSwitcher — ready-to-use switcher component
+// LanguageSwitcher - ready-to-use switcher component
 // ─────────────────────────────────────────────
 
 /** Display names for known language codes */
@@ -682,19 +682,19 @@ export type LanguageSwitcherDisplay = "native" | "english" | "code" | "flag" | "
 export interface LanguageSwitcherProps {
   /**
    * Visual style of the switcher.
-   * - `pill`     — segmented pill buttons (default)
-   * - `dropdown` — native <select> element
-   * - `minimal`  — plain text button, just the current language
+   * - `pill`     - segmented pill buttons (default)
+   * - `dropdown` - native <select> element
+   * - `minimal`  - plain text button, just the current language
    */
   variant?: LanguageSwitcherVariant;
   /**
    * What label to show for each language.
-   * - `native`      — "العربية", "English" (default)
-   * - `english`     — always in English: "Arabic", "English"
-   * - `code`        — "AR", "EN"
-   * - `flag`        — "🇸🇦", "🇬🇧"
-   * - `flag+native` — "🇸🇦 العربية"
-   * - `flag+code`   — "🇸🇦 AR"
+   * - `native`      - "العربية", "English" (default)
+   * - `english`     - always in English: "Arabic", "English"
+   * - `code`        - "AR", "EN"
+   * - `flag`        - "🇸🇦", "🇬🇧"
+   * - `flag+native` - "🇸🇦 العربية"
+   * - `flag+code`   - "🇸🇦 AR"
    */
   display?: LanguageSwitcherDisplay;
   /** Additional className */
@@ -707,7 +707,7 @@ export interface LanguageSwitcherProps {
 
 /**
  * Pre-built language switcher component.
- * Drop it anywhere inside `<BidiProvider>` — no props required.
+ * Drop it anywhere inside `<BidiProvider>` - no props required.
  *
  * @example
  * // Pill toggle (default)

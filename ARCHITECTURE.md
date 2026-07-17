@@ -136,9 +136,9 @@ Request arrives
 ## Build System
 
 Each package uses `tsup` to produce:
-- `dist/index.js` — CommonJS bundle
-- `dist/index.mjs` — ESM bundle
-- `dist/index.d.ts` — TypeScript declarations
+- `dist/index.js` - CommonJS bundle
+- `dist/index.mjs` - ESM bundle
+- `dist/index.d.ts` - TypeScript declarations
 
 TurboRepo orchestrates builds in dependency order:
 ```
@@ -151,9 +151,9 @@ TurboRepo orchestrates builds in dependency order:
 
 ## Design Principles
 
-1. **Zero dependencies in core** — `@bidikit/core` has no runtime npm dependencies
-2. **Lazy by default** — Translation namespaces load on demand
-3. **SSR safe** — No `window` access without guards
-4. **Type safe** — TypeScript strict throughout; `any` is banned
-5. **Tree shakable** — ESM-first, named exports, no side-effect barrel re-exports
-6. **Composable** — Each piece can be used independently; no mandatory coupling
+1. **Zero dependencies in core** - `@bidikit/core` has no runtime npm dependencies
+2. **Lazy by default** - Translation namespaces load on demand
+3. **SSR safe** - No `window` access without guards
+4. **Type safe** - TypeScript strict throughout; `any` is banned
+5. **Tree shakable** - ESM-first, named exports, no side-effect barrel re-exports
+6. **Composable** - Each piece can be used independently; no mandatory coupling

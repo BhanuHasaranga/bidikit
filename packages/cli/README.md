@@ -1,6 +1,6 @@
 # @bidikit/cli
 
-> CLI tooling for BidiKit — `init`, `add`, `doctor`, `extract`, `sync`, `lint`.
+> CLI tooling for BidiKit - `init`, `add`, `doctor`, `extract`, `sync`, `lint`.
 
 [![npm](https://img.shields.io/npm/v/@bidikit/cli?style=flat-square)](https://www.npmjs.com/package/@bidikit/cli)
 
@@ -32,7 +32,7 @@ npx @bidikit/cli add fa
 
 ### `doctor`
 
-Diagnoses your BidiKit setup — checks packages, config, and translation files.
+Diagnoses your BidiKit setup - checks packages, config, and translation files.
 
 ```bash
 npx @bidikit/cli doctor

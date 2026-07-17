@@ -4,7 +4,7 @@ import bidiConfig from "../bidikit.config";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BidiKit Demo — RTL/LTR Web App",
+  title: "BidiKit Demo - RTL/LTR Web App",
   description: "Demo application showcasing BidiKit's RTL/LTR capabilities",
 };
 

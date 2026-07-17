@@ -21,7 +21,7 @@ export interface BidiProviderProps {
 }
 
 /**
- * BidiProvider — wrap your application with this to enable BidiKit.
+ * BidiProvider - wrap your application with this to enable BidiKit.
  *
  * @example
  * <BidiProvider config={{ defaultLanguage: "en", supportedLanguages: ["en", "ar"] }}>
@@ -78,7 +78,7 @@ export function BidiProvider({ config, children, initialLanguage }: BidiProvider
     [bidi],
   );
 
-  // Memoised context value — only recreates when language/direction changes
+  // Memoised context value - only recreates when language/direction changes
   const value = useMemo<BidiContextValue>(
     () => ({
       bidi,

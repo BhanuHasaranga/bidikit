@@ -1,7 +1,7 @@
 /**
  * @bidikit/react
  *
- * React hooks and components for BidiKit — RTL/LTR direction-aware UI.
+ * React hooks and components for BidiKit - RTL/LTR direction-aware UI.
  *
  * @packageDocumentation
  */
@@ -46,7 +46,7 @@ export {
   Navbar,
   Sidebar,
   BidiImage,
-  // Language switcher — pre-built and headless variants
+  // Language switcher - pre-built and headless variants
   LanguageSwitcher,
   LanguageSwitcherRoot,
 } from "./components.js";

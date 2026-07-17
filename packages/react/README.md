@@ -37,29 +37,29 @@ export function App() {
 
 ## Language Switcher
 
-Drop-in ready — no configuration needed.
+Drop-in ready - no configuration needed.
 
-### `<LanguageSwitcher />` — pre-built
+### `<LanguageSwitcher />` - pre-built
 
 ```tsx
 import { LanguageSwitcher } from "@bidikit/react";
 
-// Pill toggle (default) — one button per language
+// Pill toggle (default) - one button per language
 <LanguageSwitcher />
 
 // Dropdown with flag + native name
 <LanguageSwitcher variant="dropdown" display="flag+native" />
 
-// Minimal — just the current language, click to cycle
+// Minimal - just the current language, click to cycle
 <LanguageSwitcher variant="minimal" display="flag+code" />
 
 // With change callback
 <LanguageSwitcher onLanguageChange={(lang) => console.log(lang)} />
 ```
 
-**`variant`** — `"pill"` (default) · `"dropdown"` · `"minimal"`
+**`variant`** - `"pill"` (default) · `"dropdown"` · `"minimal"`
 
-**`display`** — what label to show for each language:
+**`display`** - what label to show for each language:
 
 | Value | Example |
 |---|---|
@@ -74,7 +74,7 @@ Language name + flag lookup is built-in for 16 languages: AR, EN, FR, DE, ES, HE
 
 ---
 
-### `<LanguageSwitcherRoot>` — headless, build your own
+### `<LanguageSwitcherRoot>` - headless, build your own
 
 Render prop that gives you full control over the UI. All language state wired automatically.
 

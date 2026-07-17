@@ -18,12 +18,12 @@
 
 Adding Arabic to a website is not just adding a translation file.
 
-Arabic reads **right to left**. That means every single layout assumption your app makes — the padding, the margins, the flex direction, the icon direction, the border side, the scroll position, the input cursor — **everything is inverted.**
+Arabic reads **right to left**. That means every single layout assumption your app makes - the padding, the margins, the flex direction, the icon direction, the border side, the scroll position, the input cursor - **everything is inverted.**
 
 Most developers add Arabic and get something like this:
 
 ```
-[ English App ]          [ Arabic App — broken ]
+[ English App ]          [ Arabic App - broken ]
 
  Logo     Nav            Nav          Logo     ← header flipped ✓
  
@@ -44,7 +44,7 @@ When you add Arabic to a React/Next.js app, you actually need to handle **all** 
 
 | What breaks | Why it breaks |
 |---|---|
-| `document.dir` | Needs to be `"rtl"` — browsers don't do this automatically |
+| `document.dir` | Needs to be `"rtl"` - browsers don't do this automatically |
 | `<html lang="ar">` | Required for correct font rendering and SEO |
 | `margin-left` / `padding-left` | Must become `margin-right` / `padding-right` |
 | `flex-row` | Must become `flex-row-reverse` |
@@ -60,7 +60,7 @@ When you add Arabic to a React/Next.js app, you actually need to handle **all** 
 | `border-radius` on one side | Rounded corners on wrong side |
 | `text-indent` | Indents in wrong direction |
 
-Most i18n libraries solve only one of these — the translation part.
+Most i18n libraries solve only one of these - the translation part.
 
 **BidiKit solves all of them.**
 
@@ -68,7 +68,7 @@ Most i18n libraries solve only one of these — the translation part.
 
 ## What BidiKit Does
 
-BidiKit is an **RTL-first layout engine** for React and Next.js. It goes far beyond translations — it makes your entire UI automatically mirror itself for Arabic and all other RTL languages.
+BidiKit is an **RTL-first layout engine** for React and Next.js. It goes far beyond translations - it makes your entire UI automatically mirror itself for Arabic and all other RTL languages.
 
 One line of change:
 
@@ -76,7 +76,7 @@ One line of change:
 // Before
 <App />
 
-// After — full RTL support for Arabic, Hebrew, Persian, Urdu
+// After - full RTL support for Arabic, Hebrew, Persian, Urdu
 <BidiProvider config={{ defaultLanguage: "en", rtlLanguages: ["ar"] }}>
   <App />
 </BidiProvider>
@@ -172,8 +172,8 @@ export function Header() {
 |---|---|---|
 | [`@bidikit/core`](./packages/core) | [![npm](https://img.shields.io/npm/v/@bidikit/core?style=flat-square)](https://www.npmjs.com/package/@bidikit/core) | Zero-dependency RTL/LTR engine |
 | [`@bidikit/react`](./packages/react) | [![npm](https://img.shields.io/npm/v/@bidikit/react?style=flat-square)](https://www.npmjs.com/package/@bidikit/react) | React hooks + direction-aware components |
-| [`@bidikit/next`](./packages/next) | [![npm](https://img.shields.io/npm/v/@bidikit/next?style=flat-square)](https://www.npmjs.com/package/@bidikit/next) | Next.js App Router — SSR, middleware, SEO |
-| [`@bidikit/tailwind`](./packages/tailwind) | [![npm](https://img.shields.io/npm/v/@bidikit/tailwind?style=flat-square)](https://www.npmjs.com/package/@bidikit/tailwind) | Tailwind plugin — logical properties + `rtl:` variants |
+| [`@bidikit/next`](./packages/next) | [![npm](https://img.shields.io/npm/v/@bidikit/next?style=flat-square)](https://www.npmjs.com/package/@bidikit/next) | Next.js App Router - SSR, middleware, SEO |
+| [`@bidikit/tailwind`](./packages/tailwind) | [![npm](https://img.shields.io/npm/v/@bidikit/tailwind?style=flat-square)](https://www.npmjs.com/package/@bidikit/tailwind) | Tailwind plugin - logical properties + `rtl:` variants |
 | [`@bidikit/icons`](./packages/icons) | [![npm](https://img.shields.io/npm/v/@bidikit/icons?style=flat-square)](https://www.npmjs.com/package/@bidikit/icons) | Auto-mirroring icon wrapper |
 | [`@bidikit/css`](./packages/css) | [![npm](https://img.shields.io/npm/v/@bidikit/css?style=flat-square)](https://www.npmjs.com/package/@bidikit/css) | CSS logical utility classes |
 | [`@bidikit/cli`](./packages/cli) | [![npm](https://img.shields.io/npm/v/@bidikit/cli?style=flat-square)](https://www.npmjs.com/package/@bidikit/cli) | `init`, `add`, `doctor`, `sync`, `lint` |
@@ -182,7 +182,7 @@ export function Header() {
 
 ## Feature Walkthrough
 
-### 1. Translations — the basics
+### 1. Translations - the basics
 
 Translation files are plain JSON:
 
@@ -218,7 +218,7 @@ t("items", { count: 3 })   // "3 items" or "3 عناصر"
 
 The moment `setLanguage("ar")` is called, the layout flips. You write your CSS once, BidiKit handles both directions.
 
-**Before (LTR — English):**
+**Before (LTR - English):**
 ```
 ┌─────────────────────────────────┐
 │ 🏠 Logo        Home  About  ⚙️  │
@@ -232,7 +232,7 @@ The moment `setLanguage("ar")` is called, the layout flips. You write your CSS o
 └─────────────────────────────────┘
 ```
 
-**After (RTL — Arabic) — automatically:**
+**After (RTL - Arabic) - automatically:**
 ```
 ┌─────────────────────────────────┐
 │  ⚙️ الرئيسية  حول        شعار 🏠 │
@@ -250,7 +250,7 @@ No code changes. No class toggling. No manual `dir="rtl"` attributes scattered e
 
 ---
 
-### 3. Logical spacing — write once, works both ways
+### 3. Logical spacing - write once, works both ways
 
 Instead of:
 ```tsx
@@ -319,7 +319,7 @@ import { Row, Column, Navbar, Sidebar, Avatar, Text, Button } from "@bidikit/rea
 
 ---
 
-### 5. Icon mirroring — arrows that always point the right way
+### 5. Icon mirroring - arrows that always point the right way
 
 Directional icons (arrows, chevrons, back/forward) must flip in RTL. Non-directional icons (heart, star, user) must not.
 
@@ -348,16 +348,16 @@ Works with Lucide, Heroicons, Tabler, FontAwesome, or any SVG.
 ```tsx
 import { BidiImage } from "@bidikit/react";
 
-// Normal image — no mirroring
+// Normal image - no mirroring
 <BidiImage src="/photo.jpg" alt="Photo" />
 
-// Directional image (e.g., a person pointing) — mirrors in RTL
+// Directional image (e.g., a person pointing) - mirrors in RTL
 <BidiImage src="/pointing-hand.png" alt="Hand" mirror />
 ```
 
 ---
 
-### 7. Next.js — full SSR support
+### 7. Next.js - full SSR support
 
 ```ts
 // middleware.ts
@@ -501,7 +501,7 @@ Those are excellent libraries for **translations**. BidiKit is built for the **l
 | Zero-config Arabic support | ❌ | ❌ | ✅ |
 | Works with existing i18n | N/A | N/A | ✅ |
 
-You can even use BidiKit **alongside** react-i18next — use their translation layer and BidiKit's RTL layout engine.
+You can even use BidiKit **alongside** react-i18next - use their translation layer and BidiKit's RTL layout engine.
 
 ---
 
@@ -517,7 +517,7 @@ export function ProductCard({ product }) {
   const { isRTL } = useDirection();
 
   return (
-    // Row automatically reverses in Arabic — logo and content swap sides
+    // Row automatically reverses in Arabic - logo and content swap sides
     <Row gap={16} style={{ padding: "16px" }}>
       <img src={product.image} style={{ width: 80, borderRadius: 8 }} />
 
@@ -527,7 +527,7 @@ export function ProductCard({ product }) {
           {product.name}
         </Text>
 
-        {/* Price, currency symbol — correct position in both */}
+        {/* Price, currency symbol - correct position in both */}
         <Text style={{ color: "#6366f1" }}>
           {isRTL ? `${product.price} ر.س` : `$${product.price}`}
         </Text>
@@ -555,7 +555,7 @@ export function ProductCard({ product }) {
           [🛒 Add to Cart]  →
 ```
 
-**In Arabic — automatically:**
+**In Arabic - automatically:**
 ```
                اسم المنتج  [img 📦]
                    29.99 ر.س
@@ -579,7 +579,7 @@ pnpm test:coverage      # With coverage report
 
 ## Roadmap
 
-### v1.1 (Current — live on npm)
+### v1.1 (Current - live on npm)
 - [x] Core RTL/LTR engine
 - [x] Language management + persistence
 - [x] Translation API (nested keys, pluralization, interpolation, fallback)
@@ -625,5 +625,5 @@ MIT © [BhanuHasaranga](https://github.com/BhanuHasaranga)
 ---
 
 <div align="center">
-  <sub>Built for the 420 million+ Arabic speakers on the web — and every other RTL language after that.</sub>
+  <sub>Built for the 420 million+ Arabic speakers on the web - and every other RTL language after that.</sub>
 </div>

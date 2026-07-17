@@ -47,7 +47,7 @@ export async function getServerDirection(defaultLanguage = "en"): Promise<Direct
 }
 
 // ─────────────────────────────────────────────
-// getTranslation — server-side t()
+// getTranslation - server-side t()
 // ─────────────────────────────────────────────
 
 export interface GetTranslationOptions {
@@ -95,7 +95,7 @@ export async function getTranslation(options: GetTranslationOptions = {}): Promi
 }
 
 // ─────────────────────────────────────────────
-// generateBidiMetadata — SEO helpers
+// generateBidiMetadata - SEO helpers
 // ─────────────────────────────────────────────
 
 export interface BidiMetadataOptions {

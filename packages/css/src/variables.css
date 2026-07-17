@@ -2,7 +2,7 @@
  * @bidikit/css - CSS Custom Properties (Variables)
  *
  * Direction-aware CSS custom properties set by BidiKit's DirectionManager.
- * These are automatically managed — you can reference them in your CSS.
+ * These are automatically managed - you can reference them in your CSS.
  */
 
 :root {
@@ -10,7 +10,7 @@
   --bidi-direction: ltr;
   --bidi-is-rtl: 0;
 
-  /* Logical sides — updated automatically on language change */
+  /* Logical sides - updated automatically on language change */
   --bidi-start: left;
   --bidi-end: right;
 

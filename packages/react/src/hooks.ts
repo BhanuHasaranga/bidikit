@@ -95,7 +95,7 @@ export function useTranslation(): UseTranslationReturn {
 // ─────────────────────────────────────────────
 
 /**
- * Simple boolean hook — returns true if current direction is RTL.
+ * Simple boolean hook - returns true if current direction is RTL.
  *
  * @example
  * const isRTL = useRTL();
@@ -156,7 +156,7 @@ export function useMirror(): UseMirrorReturn {
 }
 
 // ─────────────────────────────────────────────
-// useT — shorthand translation hook
+// useT - shorthand translation hook
 // ─────────────────────────────────────────────
 
 /**

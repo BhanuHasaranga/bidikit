@@ -8,17 +8,17 @@
 import plugin from "tailwindcss/plugin";
 
 export interface BidiKitTailwindOptions {
-  /** Include RTL/LTR variants (rtl:, ltr:) — default: true */
+  /** Include RTL/LTR variants (rtl:, ltr:) - default: true */
   variants?: boolean;
-  /** Include logical spacing utilities (ms-*, me-*, ps-*, pe-*) — default: true */
+  /** Include logical spacing utilities (ms-*, me-*, ps-*, pe-*) - default: true */
   spacing?: boolean;
-  /** Include logical border radius (rounded-s-*, rounded-e-*) — default: true */
+  /** Include logical border radius (rounded-s-*, rounded-e-*) - default: true */
   borderRadius?: boolean;
-  /** Include logical borders (border-s-*, border-e-*) — default: true */
+  /** Include logical borders (border-s-*, border-e-*) - default: true */
   borders?: boolean;
-  /** Include text-start, text-end — default: true */
+  /** Include text-start, text-end - default: true */
   textAlign?: boolean;
-  /** Include start-*, end-* inset utilities — default: true */
+  /** Include start-*, end-* inset utilities - default: true */
   inset?: boolean;
 }
 
