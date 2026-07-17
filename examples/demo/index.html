@@ -410,6 +410,114 @@
     /* RTL arrow flip */
     html[dir="rtl"] .arrow-icon { transform: scaleX(-1); }
 
+    /* ── Switcher demo ── */
+    .switcher-demo {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .switcher-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .switcher-row:last-child { border-bottom: none; }
+    .switcher-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      min-width: 120px;
+    }
+    .switcher-label code {
+      font-size: 11px;
+      background: var(--surface2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent);
+      display: block;
+      margin-top: 4px;
+      font-family: monospace;
+    }
+    /* pill switcher */
+    .sw-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+    .sw-pill button {
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .sw-pill button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    /* dropdown switcher */
+    .sw-select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    /* minimal switcher */
+    .sw-minimal {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .sw-minimal:hover { background: var(--surface2); }
+    /* headless custom */
+    .sw-headless {
+      display: flex;
+      gap: 6px;
+    }
+    .sw-headless button {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .sw-headless button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(99,102,241,0.08);
+    }
+
     /* ── Direction indicator ── */
     .dir-indicator {
       display: flex;
@@ -713,6 +821,59 @@
 
 <hr class="divider" />
 
+<!-- ── Language Switcher Demo ── -->
+<section class="section">
+  <div class="section-label" data-key="sw.label">Built-in Component</div>
+  <h2 class="section-title" data-key="sw.title">Language Switcher — 3 variants + headless</h2>
+  <p class="section-sub" data-key="sw.sub">All variants are live. Click them — they all control the same language state.</p>
+
+  <div class="switcher-demo">
+    <div class="switcher-row">
+      <div class="switcher-label">
+        <span data-key="sw.pill">Pill toggle</span>
+        <code>&lt;LanguageSwitcher /&gt;</code>
+      </div>
+      <div class="sw-pill" id="sw-pill">
+        <button class="active" onclick="demoSetLang('en', this.closest('.sw-pill'))" data-lang="en">English</button>
+        <button onclick="demoSetLang('ar', this.closest('.sw-pill'))" data-lang="ar">العربية</button>
+      </div>
+    </div>
+    <div class="switcher-row">
+      <div class="switcher-label">
+        <span data-key="sw.dropdown">Dropdown</span>
+        <code>variant="dropdown" display="flag+native"</code>
+      </div>
+      <select class="sw-select" id="sw-dropdown" onchange="setLang(this.value)">
+        <option value="en">🇬🇧 English</option>
+        <option value="ar">🇸🇦 العربية</option>
+      </select>
+    </div>
+    <div class="switcher-row">
+      <div class="switcher-label">
+        <span data-key="sw.minimal">Minimal</span>
+        <code>variant="minimal" display="flag+code"</code>
+      </div>
+      <button class="sw-minimal" id="sw-minimal" onclick="setLang(currentLang === 'en' ? 'ar' : 'en')">🇬🇧 EN</button>
+    </div>
+    <div class="switcher-row">
+      <div class="switcher-label">
+        <span data-key="sw.headless">Headless custom</span>
+        <code>&lt;LanguageSwitcherRoot&gt;</code>
+      </div>
+      <div class="sw-headless" id="sw-headless">
+        <button class="active" data-lang="en" onclick="demoSetLang('en', this.closest('.sw-headless'))">EN</button>
+        <button data-lang="ar" onclick="demoSetLang('ar', this.closest('.sw-headless'))">AR</button>
+      </div>
+    </div>
+  </div>
+
+  <p style="color:var(--muted);font-size:13px;margin-top:16px;line-height:1.6" data-key="sw.note">
+    In React: import <code style="color:var(--accent);background:var(--surface2);padding:2px 6px;border-radius:4px">{ LanguageSwitcher, LanguageSwitcherRoot }</code> from <code style="color:var(--accent);background:var(--surface2);padding:2px 6px;border-radius:4px">@bidikit/react</code>
+  </p>
+</section>
+
+<hr class="divider" />
+
 <!-- ── Features ── -->
 <section class="section" id="packages">
   <div class="section-label" data-key="features.label">What's Included</div>
@@ -747,6 +908,11 @@
       <div class="card-icon">🖥️</div>
       <h3 data-key="f6.title">CLI Tools</h3>
       <p data-key="f6.desc">npx @bidikit/cli init — scaffold translations, sync missing keys, lint, extract from source.</p>
+    </div>
+    <div class="card flip">
+      <div class="card-icon">🌐</div>
+      <h3 data-key="f7.title">Language Switcher</h3>
+      <p data-key="f7.desc">&lt;LanguageSwitcher /&gt; drop-in pill, dropdown, or minimal. Or use LanguageSwitcherRoot for a fully custom design.</p>
     </div>
   </div>
 </section>
