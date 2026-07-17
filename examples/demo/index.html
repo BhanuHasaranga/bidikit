@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BidiKit — RTL Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #6366f1;
+      --accent-dark: #4f46e5;
+      --accent-light: #e0e7ff;
+      --bg: #0f0f14;
+      --surface: #16161e;
+      --surface2: #1e1e2a;
+      --border: #2a2a38;
+      --text: #e8e8f0;
+      --muted: #8888a8;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --radius: 12px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: font-family var(--transition);
+    }
+
+    html[lang="ar"] body,
+    html[lang="ar"] * { font-family: 'Noto Sans Arabic', sans-serif; }
+
+    /* ── Layout transitions ── */
+    .flip { transition: all var(--transition); }
+
+    /* ── Top bar ── */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), #818cf8);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); background: var(--surface2); }
+    .nav-links a.active { color: var(--accent); }
+
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+
+    /* ── Language toggle ── */
+    .lang-toggle {
+      display: flex;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e8e8f0 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 600px;
+      margin-inline: auto;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(99,102,241,0.4); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--surface2); border-color: var(--accent); }
+
+    /* ── Section ── */
+    .section { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 580px;
+    }
+
+    /* ── Cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: all 0.2s;
+    }
+
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-light);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── RTL live demo ── */
+    .demo-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .demo-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+    }
+
+    .demo-tab {
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      margin-bottom: -1px;
+    }
+
+    .demo-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .demo-panel { display: none; padding: 28px; }
+    .demo-panel.active { display: block; }
+
+    /* ── Form demo ── */
+    .form-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      min-width: 100px;
+      text-align: end;
+    }
+
+    .form-input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      text-align: start;
+    }
+
+    .form-input:focus { border-color: var(--accent); }
+
+    /* ── Nav demo ── */
+    .nav-demo {
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .nav-demo-logo { font-weight: 700; font-size: 16px; color: var(--accent); }
+
+    .nav-demo-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-demo-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .avatar {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), #818cf8);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* ── Product card demo ── */
+    .product-card {
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .product-img {
+      width: 72px; height: 72px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #818cf8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .product-info { flex: 1; min-width: 0; }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      text-align: start;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-align: start;
+      direction: ltr;  /* prices stay LTR */
+    }
+
+    .product-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 13px;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    .arrow-icon {
+      display: inline-block;
+      font-size: 18px;
+      transition: transform var(--transition);
+    }
+
+    /* RTL arrow flip */
+    html[dir="rtl"] .arrow-icon { transform: scaleX(-1); }
+
+    /* ── Direction indicator ── */
+    .dir-indicator {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .dir-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .dir-badge.on { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+    .dir-badge.off { background: rgba(99,102,241,0.08); color: var(--muted); border: 1px solid var(--border); }
+
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+    /* ── Checklist ── */
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all var(--transition);
+    }
+
+    .check-item.done { color: var(--text); border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.05); }
+    .check-icon { font-size: 16px; flex-shrink: 0; }
+
+    /* ── Stats ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e8e8f0 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Transition glow on language switch ── */
+    .lang-switch-flash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.6s;
+      z-index: 9999;
+    }
+    .lang-switch-flash.flash { opacity: 1; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { padding: 50px 16px 40px; }
+      .section { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Flash overlay on language switch -->
+<div class="lang-switch-flash" id="flash"></div>
+
+<!-- ── Navbar ── -->
+<header class="topbar">
+  <a href="#" class="logo flip">
+    <div class="logo-icon">⇄</div>
+    <span data-key="brand">BidiKit</span>
+  </a>
+
+  <nav>
+    <ul class="nav-links flip">
+      <li><a href="#features" class="active" data-key="nav.features">Features</a></li>
+      <li><a href="#demo" data-key="nav.demo">Live Demo</a></li>
+      <li><a href="#packages" data-key="nav.packages">Packages</a></li>
+      <li><a href="https://github.com/BhanuHasaranga/bidikit" target="_blank" data-key="nav.github">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <div class="topbar-right flip">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ar')">عربي</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-badge">
+    <span>🌐</span>
+    <span data-key="badge">RTL-first · Arabic ready · Zero config</span>
+  </div>
+  <h1 data-key="hero.title">Every website,<br />in every direction.</h1>
+  <p data-key="hero.sub">BidiKit makes your React and Next.js app automatically mirror itself for Arabic, Hebrew, Persian, and Urdu — layouts, icons, spacing, and all.</p>
+  <div class="hero-actions flip">
+    <a href="https://www.npmjs.com/package/@bidikit/core" target="_blank" class="btn btn-primary">
+      <span>📦</span>
+      <span data-key="hero.install">npm install @bidikit/core</span>
+    </a>
+    <a href="https://github.com/BhanuHasaranga/bidikit" target="_blank" class="btn btn-ghost">
+      <span>⭐</span>
+      <span data-key="hero.github">Star on GitHub</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── Direction status ── -->
+<div class="section" style="padding-top:0">
+  <div class="dir-indicator flip" id="dirIndicator">
+    <div class="dir-badge on"><div class="dot"></div><span id="dirLabel">LTR Active</span></div>
+    <div class="dir-badge off" id="badge-dir"><div class="dot"></div><span id="dirLang">Language: English</span></div>
+    <div class="dir-badge off"><div class="dot"></div><span id="dirFlip">document.dir = "ltr"</span></div>
+    <div class="dir-badge off"><div class="dot"></div><span id="dirHtml">html[lang] = "en"</span></div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ── Live Demo ── -->
+<section class="section" id="demo">
+  <div class="section-label" data-key="demo.label">Live Interaction</div>
+  <h2 class="section-title" data-key="demo.title">See it flip in real time</h2>
+  <p class="section-sub" data-key="demo.sub">Switch the language above. Every component below automatically adapts — no code changes needed.</p>
+
+  <div class="demo-container">
+    <div class="demo-tabs">
+      <div class="demo-tab active" onclick="switchTab(this,'tab-nav')" data-key="demo.tab1">Navigation</div>
+      <div class="demo-tab" onclick="switchTab(this,'tab-form')" data-key="demo.tab2">Form</div>
+      <div class="demo-tab" onclick="switchTab(this,'tab-products')" data-key="demo.tab3">Products</div>
+    </div>
+
+    <!-- Navigation tab -->
+    <div class="demo-panel active" id="tab-nav">
+      <div class="nav-demo flip">
+        <div class="nav-demo-logo">⇄ BidiKit</div>
+        <ul class="nav-demo-links">
+          <li data-key="nav.features">Features</li>
+          <li data-key="nav.demo">Demo</li>
+          <li data-key="nav.docs">Docs</li>
+        </ul>
+        <div class="nav-demo-user">
+          <div class="avatar">AH</div>
+          <span data-key="user.name">Ahmed Hassan</span>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-size:14px;line-height:1.7" data-key="demo.nav.desc">
+        The navbar automatically reverses order in RTL — logo moves to the right, user account to the left, navigation links maintain correct reading order.
+      </p>
+    </div>
+
+    <!-- Form tab -->
+    <div class="demo-panel" id="tab-form">
+      <div style="max-width:480px">
+        <div class="form-row flip">
+          <label class="form-label" data-key="form.name">Full Name</label>
+          <input class="form-input" type="text" data-placeholder-key="form.namePh" placeholder="Enter your name" />
+        </div>
+        <div class="form-row flip">
+          <label class="form-label" data-key="form.email">Email</label>
+          <input class="form-input" type="email" data-placeholder-key="form.emailPh" placeholder="Enter your email" />
+        </div>
+        <div class="form-row flip">
+          <label class="form-label" data-key="form.city">City</label>
+          <input class="form-input" type="text" data-placeholder-key="form.cityPh" placeholder="Your city" />
+        </div>
+        <div class="form-row flip" style="margin-top:8px">
+          <div style="min-width:100px"></div>
+          <div style="display:flex;gap:10px;flex:1">
+            <button class="btn btn-ghost btn-sm flip" data-key="form.cancel">Cancel</button>
+            <button class="btn btn-primary btn-sm flip">
+              <span data-key="form.save">Save Changes</span>
+              <span class="arrow-icon">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-top:16px" data-key="demo.form.desc">
+        Labels align to the correct edge, inputs use logical text-align, and the submit arrow automatically flips direction.
+      </p>
+    </div>
+
+    <!-- Products tab -->
+    <div class="demo-panel" id="tab-products">
+      <div class="product-card flip">
+        <div class="product-img">📱</div>
+        <div class="product-info">
+          <div class="product-name" data-key="product1.name">Wireless Earbuds Pro</div>
+          <div class="product-price" id="price1"></div>
+          <div class="product-actions flip">
+            <button class="btn btn-primary btn-sm">
+              <span data-key="product.buy">Add to Cart</span>
+            </button>
+            <span class="arrow-icon">→</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card flip">
+        <div class="product-img">💻</div>
+        <div class="product-info">
+          <div class="product-name" data-key="product2.name">Smart Watch Elite</div>
+          <div class="product-price" id="price2"></div>
+          <div class="product-actions flip">
+            <button class="btn btn-primary btn-sm">
+              <span data-key="product.buy">Add to Cart</span>
+            </button>
+            <span class="arrow-icon">→</span>
+          </div>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-top:8px" data-key="demo.product.desc">
+        Product cards flip their layout — image and text swap sides. Arrows point in the reading direction. Prices stay numeric LTR.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── Auto-applied checklist ── -->
+<section class="section" id="features">
+  <div class="section-label" data-key="checklist.label">Zero Manual Work</div>
+  <h2 class="section-title" data-key="checklist.title">What BidiKit does automatically</h2>
+  <p class="section-sub" data-key="checklist.sub">Switch to Arabic above and watch all of these activate instantly:</p>
+  <div class="checklist" id="checklist">
+    <div class="check-item done" id="chk-dir">
+      <span class="check-icon">✓</span><span>document.dir = "ltr"</span>
+    </div>
+    <div class="check-item" id="chk-lang">
+      <span class="check-icon">⏳</span><span data-key="chk.lang">html lang attribute</span>
+    </div>
+    <div class="check-item" id="chk-flex">
+      <span class="check-icon">⏳</span><span data-key="chk.flex">Flex direction reversed</span>
+    </div>
+    <div class="check-item" id="chk-margin">
+      <span class="check-icon">⏳</span><span data-key="chk.margin">margin-start / margin-end</span>
+    </div>
+    <div class="check-item" id="chk-text">
+      <span class="check-icon">⏳</span><span data-key="chk.text">text-align: start</span>
+    </div>
+    <div class="check-item" id="chk-icon">
+      <span class="check-icon">⏳</span><span data-key="chk.icon">Arrow icons mirrored</span>
+    </div>
+    <div class="check-item" id="chk-font">
+      <span class="check-icon">⏳</span><span data-key="chk.font">Arabic font loaded</span>
+    </div>
+    <div class="check-item" id="chk-border">
+      <span class="check-icon">⏳</span><span data-key="chk.border">border-inline-start</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── Features ── -->
+<section class="section" id="packages">
+  <div class="section-label" data-key="features.label">What's Included</div>
+  <h2 class="section-title" data-key="features.title">Everything you need for RTL</h2>
+  <div class="cards">
+    <div class="card flip">
+      <div class="card-icon">🔄</div>
+      <h3 data-key="f1.title">Auto Direction Engine</h3>
+      <p data-key="f1.desc">Sets document.dir, html lang, CSS variables, and class names the moment you call setLanguage().</p>
+    </div>
+    <div class="card flip">
+      <div class="card-icon">📝</div>
+      <h3 data-key="f2.title">Translation API</h3>
+      <p data-key="f2.desc">Nested keys, interpolation, pluralization, fallback languages, and lazy loading built in.</p>
+    </div>
+    <div class="card flip">
+      <div class="card-icon">🪞</div>
+      <h3 data-key="f3.title">Icon Mirroring</h3>
+      <p data-key="f3.desc">Arrows, chevrons, and back icons automatically flip. Hearts and stars stay put.</p>
+    </div>
+    <div class="card flip">
+      <div class="card-icon">🎨</div>
+      <h3 data-key="f4.title">Tailwind Plugin</h3>
+      <p data-key="f4.desc">ms-, me-, ps-, pe-, rounded-s, border-e, text-start — write once, both directions.</p>
+    </div>
+    <div class="card flip">
+      <div class="card-icon">⚡</div>
+      <h3 data-key="f5.title">Next.js SSR</h3>
+      <p data-key="f5.desc">Middleware, server provider, generateBidiMetadata — correct lang and dir before first paint.</p>
+    </div>
+    <div class="card flip">
+      <div class="card-icon">🖥️</div>
+      <h3 data-key="f6.title">CLI Tools</h3>
+      <p data-key="f6.desc">npx @bidikit/cli init — scaffold translations, sync missing keys, lint, extract from source.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── Stats ── -->
+<section class="section">
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">420M+</div>
+      <div class="stat-label" data-key="stat1">Arabic speakers on the web</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">7</div>
+      <div class="stat-label" data-key="stat2">npm packages, zero config</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">11</div>
+      <div class="stat-label" data-key="stat3">RTL languages supported</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0</div>
+      <div class="stat-label" data-key="stat4">manual dir="" attributes needed</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>
+    <strong>BidiKit</strong> — The missing layer for RTL web applications.
+    <br />
+    <a href="https://www.npmjs.com/package/@bidikit/core" target="_blank">npm</a> ·
+    <a href="https://github.com/BhanuHasaranga/bidikit" target="_blank">GitHub</a> ·
+    MIT License
+  </p>
+  <p style="margin-top:8px;font-size:12px">
+    Built for the 420 million+ Arabic speakers on the web.
+  </p>
+</footer>
+
+<script>
+  // ── Translations ──────────────────────────────────────
+  const i18n = {
+    en: {
+      "brand": "BidiKit",
+      "badge": "RTL-first · Arabic ready · Zero config",
+      "hero.title": "Every website,<br />in every direction.",
+      "hero.sub": "BidiKit makes your React and Next.js app automatically mirror itself for Arabic, Hebrew, Persian, and Urdu — layouts, icons, spacing, and all.",
+      "hero.install": "npm install @bidikit/core",
+      "hero.github": "Star on GitHub",
+      "nav.features": "Features",
+      "nav.demo": "Demo",
+      "nav.docs": "Docs",
+      "nav.packages": "Packages",
+      "nav.github": "GitHub",
+      "demo.label": "Live Interaction",
+      "demo.title": "See it flip in real time",
+      "demo.sub": "Switch the language above. Every component below automatically adapts — no code changes needed.",
+      "demo.tab1": "Navigation",
+      "demo.tab2": "Form",
+      "demo.tab3": "Products",
+      "demo.nav.desc": "The navbar automatically reverses order in RTL — logo moves to the right, user account to the left, navigation links maintain correct reading order.",
+      "demo.form.desc": "Labels align to the correct edge, inputs use logical text-align, and the submit arrow automatically flips direction.",
+      "demo.product.desc": "Product cards flip their layout — image and text swap sides. Arrows point in the reading direction. Prices stay numeric LTR.",
+      "form.name": "Full Name",
+      "form.namePh": "Enter your name",
+      "form.email": "Email",
+      "form.emailPh": "Enter your email",
+      "form.city": "City",
+      "form.cityPh": "Your city",
+      "form.save": "Save Changes",
+      "form.cancel": "Cancel",
+      "user.name": "Ahmed Hassan",
+      "product1.name": "Wireless Earbuds Pro",
+      "product2.name": "Smart Watch Elite",
+      "product.buy": "Add to Cart",
+      "checklist.label": "Zero Manual Work",
+      "checklist.title": "What BidiKit does automatically",
+      "checklist.sub": "Switch to Arabic above and watch all of these activate instantly:",
+      "chk.lang": "html lang attribute",
+      "chk.flex": "Flex direction reversed",
+      "chk.margin": "margin-start / margin-end",
+      "chk.text": "text-align: start",
+      "chk.icon": "Arrow icons mirrored",
+      "chk.font": "Arabic font loaded",
+      "chk.border": "border-inline-start",
+      "features.label": "What's Included",
+      "features.title": "Everything you need for RTL",
+      "f1.title": "Auto Direction Engine",
+      "f1.desc": "Sets document.dir, html lang, CSS variables, and class names the moment you call setLanguage().",
+      "f2.title": "Translation API",
+      "f2.desc": "Nested keys, interpolation, pluralization, fallback languages, and lazy loading built in.",
+      "f3.title": "Icon Mirroring",
+      "f3.desc": "Arrows, chevrons, and back icons automatically flip. Hearts and stars stay put.",
+      "f4.title": "Tailwind Plugin",
+      "f4.desc": "ms-, me-, ps-, pe-, rounded-s, border-e, text-start — write once, both directions.",
+      "f5.title": "Next.js SSR",
+      "f5.desc": "Middleware, server provider, generateBidiMetadata — correct lang and dir before first paint.",
+      "f6.title": "CLI Tools",
+      "f6.desc": "npx @bidikit/cli init — scaffold translations, sync missing keys, lint, extract from source.",
+      "stat1": "Arabic speakers on the web",
+      "stat2": "npm packages, zero config",
+      "stat3": "RTL languages supported",
+      "stat4": "manual dir=\"\" attributes needed",
+    },
+    ar: {
+      "brand": "BidiKit",
+      "badge": "عربي أولاً · جاهز للـ RTL · بدون إعداد",
+      "hero.title": "كل موقع،<br />في كل اتجاه.",
+      "hero.sub": "BidiKit يجعل تطبيق React و Next.js الخاص بك يعكس نفسه تلقائيًا للعربية والعبرية والفارسية والأردية — التخطيطات والأيقونات والمسافات وكل شيء.",
+      "hero.install": "npm install @bidikit/core",
+      "hero.github": "⭐ على GitHub",
+      "nav.features": "المميزات",
+      "nav.demo": "تجربة مباشرة",
+      "nav.docs": "التوثيق",
+      "nav.packages": "الحزم",
+      "nav.github": "GitHub",
+      "demo.label": "تفاعل مباشر",
+      "demo.title": "شاهد الانعكاس في الوقت الفعلي",
+      "demo.sub": "غيّر اللغة بالأعلى. كل مكوّن يتكيف تلقائيًا — بدون تغيير أي كود.",
+      "demo.tab1": "شريط التنقل",
+      "demo.tab2": "النموذج",
+      "demo.tab3": "المنتجات",
+      "demo.nav.desc": "شريط التنقل يعكس ترتيبه تلقائيًا في وضع RTL — الشعار ينتقل لليمين، وحساب المستخدم لليسار، وروابط التنقل تحافظ على ترتيب القراءة الصحيح.",
+      "demo.form.desc": "التسميات تتوافق مع الحافة الصحيحة، والمدخلات تستخدم محاذاة نصية منطقية، وسهم الإرسال يعكس اتجاهه تلقائيًا.",
+      "demo.product.desc": "بطاقات المنتجات تعكس تخطيطها — الصورة والنص يتبادلان الجانبين. الأسهم تشير في اتجاه القراءة. الأسعار تبقى رقمية LTR.",
+      "form.name": "الاسم الكامل",
+      "form.namePh": "أدخل اسمك",
+      "form.email": "البريد الإلكتروني",
+      "form.emailPh": "أدخل بريدك الإلكتروني",
+      "form.city": "المدينة",
+      "form.cityPh": "مدينتك",
+      "form.save": "حفظ التغييرات",
+      "form.cancel": "إلغاء",
+      "user.name": "أحمد حسن",
+      "product1.name": "سماعات لاسلكية برو",
+      "product2.name": "ساعة ذكية إيليت",
+      "product.buy": "أضف للسلة",
+      "checklist.label": "صفر عمل يدوي",
+      "checklist.title": "ما يفعله BidiKit تلقائيًا",
+      "checklist.sub": "انتقل للعربية بالأعلى وشاهد كل هذه الأمور تُفعَّل فورًا:",
+      "chk.lang": "سمة lang لـ HTML",
+      "chk.flex": "عكس اتجاه Flex",
+      "chk.margin": "margin-start / margin-end",
+      "chk.text": "text-align: start",
+      "chk.icon": "عكس أيقونات الأسهم",
+      "chk.font": "تحميل الخط العربي",
+      "chk.border": "border-inline-start",
+      "features.label": "ما يتضمنه",
+      "features.title": "كل ما تحتاجه لدعم RTL",
+      "f1.title": "محرك الاتجاه التلقائي",
+      "f1.desc": "يضبط document.dir ولغة HTML ومتغيرات CSS وأسماء الفئات فور استدعاء setLanguage().",
+      "f2.title": "واجهة برمجة الترجمة",
+      "f2.desc": "مفاتيح متداخلة وتعيين متغيرات وصيغ جمع ولغات احتياطية وتحميل كسول — كلها مدمجة.",
+      "f3.title": "عكس الأيقونات",
+      "f3.desc": "الأسهم والإشارات وأيقونات الرجوع تنعكس تلقائيًا. القلوب والنجوم تبقى كما هي.",
+      "f4.title": "ملحق Tailwind",
+      "f4.desc": "ms- و me- و ps- و pe- و rounded-s و border-e و text-start — اكتب مرة، يعمل في الاتجاهين.",
+      "f5.title": "دعم Next.js SSR",
+      "f5.desc": "Middleware ومزود الخادم وgenerateBidiMetadata — lang وdir صحيحان قبل أول رسم.",
+      "f6.title": "أدوات CLI",
+      "f6.desc": "npx @bidikit/cli init — هيكل الترجمات، مزامنة المفاتيح الناقصة، فحص الكود، استخراج المفاتيح.",
+      "stat1": "متحدث عربي على الإنترنت",
+      "stat2": "حزمة npm، بدون إعداد",
+      "stat3": "لغات RTL مدعومة",
+      "stat4": "عدد سمات dir=\"\" اليدوية المطلوبة",
+    }
+  };
+
+  // ── State ──────────────────────────────────────────────
+  let currentLang = 'en';
+
+  // ── Set language ───────────────────────────────────────
+  function setLang(lang) {
+    currentLang = lang;
+    const isRTL = lang === 'ar';
+    const html = document.documentElement;
+
+    // Flash
+    const flash = document.getElementById('flash');
+    flash.classList.add('flash');
+    setTimeout(() => flash.classList.remove('flash'), 600);
+
+    // Core direction
+    html.setAttribute('lang', lang);
+    html.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+
+    // Toggle lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === (isRTL ? 'عربي' : 'EN'));
+    });
+
+    // Translate all keyed elements
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      const val = i18n[lang][key];
+      if (val !== undefined) el.innerHTML = val;
+    });
+
+    // Translate placeholders
+    document.querySelectorAll('[data-placeholder-key]').forEach(el => {
+      const key = el.getAttribute('data-placeholder-key');
+      const val = i18n[lang][key];
+      if (val !== undefined) el.setAttribute('placeholder', val);
+    });
+
+    // Update product prices
+    document.getElementById('price1').textContent = isRTL ? '٢٤٩ ر.س' : '$249';
+    document.getElementById('price2').textContent = isRTL ? '١٨٩ ر.س' : '$189';
+
+    // Update direction badges
+    document.getElementById('dirLabel').textContent = isRTL ? 'RTL نشط' : 'LTR Active';
+    document.getElementById('dirLang').textContent = isRTL ? 'اللغة: العربية' : 'Language: English';
+    document.getElementById('dirFlip').textContent = `document.dir = "${isRTL ? 'rtl' : 'ltr'}"`;
+    document.getElementById('dirHtml').textContent = `html[lang] = "${lang}"`;
+
+    // Update all dir badges state
+    const badges = document.querySelectorAll('.dir-badge');
+    if (isRTL) {
+      badges.forEach(b => b.classList.add('on'));
+    } else {
+      badges.forEach((b, i) => b.classList.toggle('on', i === 0));
+    }
+
+    // Update checklist
+    const chkDir = document.getElementById('chk-dir');
+    const chkItems = ['chk-lang','chk-flex','chk-margin','chk-text','chk-icon','chk-font','chk-border'];
+
+    chkDir.querySelector('span:first-child').textContent = isRTL ? '✓' : '✓';
+    chkDir.querySelector('span:last-child').textContent = `document.dir = "${isRTL ? 'rtl' : 'ltr'}"`;
+    chkDir.className = 'check-item done';
+
+    chkItems.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.querySelector('span:first-child').textContent = isRTL ? '✓' : '⏳';
+        el.className = isRTL ? 'check-item done' : 'check-item';
+      }
+    });
+  }
+
+  // ── Demo tabs ─────────────────────────────────────────
+  function switchTab(tab, panelId) {
+    document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(panelId).classList.add('active');
+  }
+
+  // ── Init ──────────────────────────────────────────────
+  document.getElementById('price1').textContent = '$249';
+  document.getElementById('price2').textContent = '$189';
+</script>
+</body>
+</html>
