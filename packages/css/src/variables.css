@@ -1,0 +1,23 @@
+/**
+ * @bidikit/css - CSS Custom Properties (Variables)
+ *
+ * Direction-aware CSS custom properties set by BidiKit's DirectionManager.
+ * These are automatically managed — you can reference them in your CSS.
+ */
+
+:root {
+  /* Direction */
+  --bidi-direction: ltr;
+  --bidi-is-rtl: 0;
+
+  /* Logical sides — updated automatically on language change */
+  --bidi-start: left;
+  --bidi-end: right;
+
+  /* Spacing helpers (customize these) */
+  --bidi-spacing-xs: 0.25rem;
+  --bidi-spacing-sm: 0.5rem;
+  --bidi-spacing-md: 1rem;
+  --bidi-spacing-lg: 1.5rem;
+  --bidi-spacing-xl: 2rem;
+}

@@ -1,0 +1,108 @@
+/**
+ * @bidikit/css - CSS Utilities
+ *
+ * Direction-aware CSS utility classes using logical properties.
+ * These work without any JavaScript — just add [dir="rtl"] to your <html>.
+ */
+
+/* ─── Text Alignment ───────────────────────────────────── */
+
+.bidi-text-start {
+  text-align: start;
+}
+
+.bidi-text-end {
+  text-align: end;
+}
+
+/* ─── Flex Direction ───────────────────────────────────── */
+
+.bidi-row {
+  display: flex;
+  flex-direction: row;
+}
+
+[dir="rtl"] .bidi-row {
+  flex-direction: row-reverse;
+}
+
+.bidi-row-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .bidi-row-reverse {
+  flex-direction: row;
+}
+
+/* ─── Logical Margins ──────────────────────────────────── */
+
+.bidi-ms-auto { margin-inline-start: auto; }
+.bidi-me-auto { margin-inline-end: auto; }
+.bidi-mx-auto { margin-inline: auto; }
+
+/* ─── Position helpers ─────────────────────────────────── */
+
+.bidi-start-0 { inset-inline-start: 0; }
+.bidi-end-0   { inset-inline-end: 0; }
+
+/* ─── Logical Padding ──────────────────────────────────── */
+
+.bidi-ps-1 { padding-inline-start: 0.25rem; }
+.bidi-ps-2 { padding-inline-start: 0.5rem; }
+.bidi-ps-4 { padding-inline-start: 1rem; }
+.bidi-ps-6 { padding-inline-start: 1.5rem; }
+.bidi-ps-8 { padding-inline-start: 2rem; }
+
+.bidi-pe-1 { padding-inline-end: 0.25rem; }
+.bidi-pe-2 { padding-inline-end: 0.5rem; }
+.bidi-pe-4 { padding-inline-end: 1rem; }
+.bidi-pe-6 { padding-inline-end: 1.5rem; }
+.bidi-pe-8 { padding-inline-end: 2rem; }
+
+/* ─── Logical Margins ──────────────────────────────────── */
+
+.bidi-ms-1 { margin-inline-start: 0.25rem; }
+.bidi-ms-2 { margin-inline-start: 0.5rem; }
+.bidi-ms-4 { margin-inline-start: 1rem; }
+.bidi-ms-6 { margin-inline-start: 1.5rem; }
+.bidi-ms-8 { margin-inline-start: 2rem; }
+
+.bidi-me-1 { margin-inline-end: 0.25rem; }
+.bidi-me-2 { margin-inline-end: 0.5rem; }
+.bidi-me-4 { margin-inline-end: 1rem; }
+.bidi-me-6 { margin-inline-end: 1.5rem; }
+.bidi-me-8 { margin-inline-end: 2rem; }
+
+/* ─── Border sides ─────────────────────────────────────── */
+
+.bidi-border-s { border-inline-start-width: 1px; border-inline-start-style: solid; }
+.bidi-border-e { border-inline-end-width: 1px; border-inline-end-style: solid; }
+
+/* ─── RTL-specific overrides ───────────────────────────── */
+
+[dir="rtl"] .rtl\:flip {
+  transform: scaleX(-1);
+}
+
+[dir="ltr"] .ltr\:flip {
+  transform: scaleX(-1);
+}
+
+/* ─── BidiKit body classes ─────────────────────────────── */
+
+body.bidi-rtl {
+  direction: rtl;
+  text-align: start;
+}
+
+body.bidi-ltr {
+  direction: ltr;
+  text-align: start;
+}
+
+/* ─── Smooth direction transitions ─────────────────────── */
+
+.bidi-transition {
+  transition: margin 0.2s ease, padding 0.2s ease, transform 0.2s ease;
+}

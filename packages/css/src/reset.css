@@ -1,0 +1,64 @@
+/**
+ * @bidikit/css - RTL-Ready Reset
+ *
+ * Minimal reset that uses logical properties throughout.
+ * Import this once at the root of your application.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Default direction — overridden by BidiKit's DirectionManager */
+  direction: ltr;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  margin: 0;
+  line-height: inherit;
+  text-align: start;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin-block: 0;
+}
+
+p {
+  margin-block: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+img, svg, video, canvas {
+  display: block;
+  max-inline-size: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  text-align: start;
+}
+
+/* Use logical properties for list indentation */
+ol, ul {
+  list-style: none;
+  padding-inline-start: 0;
+  margin-block: 0;
+}
+
+/* Blockquote uses logical margin */
+blockquote {
+  margin-inline: 0;
+  border-inline-start: 4px solid;
+  padding-inline-start: 1rem;
+}

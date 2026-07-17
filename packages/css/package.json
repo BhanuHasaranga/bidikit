@@ -1,0 +1,26 @@
+{
+  "name": "@bidikit/css",
+  "version": "1.0.0",
+  "description": "Pure CSS utilities for BidiKit — zero-JS RTL/LTR logical property helpers",
+  "keywords": ["rtl", "ltr", "css", "logical-properties", "bidi", "direction"],
+  "license": "MIT",
+  "author": "BhanuHasaranga",
+  "type": "module",
+  "main": "./dist/index.css",
+  "exports": {
+    ".": "./dist/index.css",
+    "./reset": "./dist/reset.css",
+    "./utilities": "./dist/utilities.css",
+    "./variables": "./dist/variables.css"
+  },
+  "files": ["dist", "README.md"],
+  "sideEffects": ["**/*.css"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}

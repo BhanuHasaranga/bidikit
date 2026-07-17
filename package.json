@@ -1,0 +1,60 @@
+{
+  "name": "bidikit-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "BidiKit monorepo — The missing layer for RTL & LTR web applications",
+  "packageManager": "pnpm@9.14.2",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\" --ignore-path .gitignore",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\" --ignore-path .gitignore",
+    "clean": "turbo run clean && rimraf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.15.0",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "rtl",
+    "ltr",
+    "bidi",
+    "bidirectional",
+    "i18n",
+    "internationalization",
+    "arabic",
+    "hebrew",
+    "persian",
+    "urdu",
+    "react",
+    "nextjs",
+    "tailwind"
+  ],
+  "author": "BhanuHasaranga",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BhanuHasaranga/bidikit.git"
+  },
+  "homepage": "https://bidikit.dev",
+  "bugs": {
+    "url": "https://github.com/BhanuHasaranga/bidikit/issues"
+  }
+}

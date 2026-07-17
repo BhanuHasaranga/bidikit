@@ -1,0 +1,9 @@
+/**
+ * @bidikit/css - Full bundle
+ *
+ * Import all BidiKit CSS utilities in one file.
+ */
+
+@import "./variables.css";
+@import "./reset.css";
+@import "./utilities.css";

@@ -1,0 +1,61 @@
+{
+  "name": "@bidikit/next",
+  "version": "1.0.0",
+  "description": "Next.js integration for BidiKit — SSR, middleware, SEO, App Router support",
+  "keywords": ["rtl", "ltr", "nextjs", "next", "i18n", "ssr", "middleware", "seo", "direction"],
+  "license": "MIT",
+  "author": "BhanuHasaranga",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BhanuHasaranga/bidikit.git",
+    "directory": "packages/next"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+    },
+    "./middleware": {
+      "import": { "types": "./dist/middleware.d.ts", "default": "./dist/middleware.js" },
+      "require": { "types": "./dist/middleware.d.cts", "default": "./dist/middleware.cjs" }
+    },
+    "./server": {
+      "import": { "types": "./dist/server.d.ts", "default": "./dist/server.js" },
+      "require": { "types": "./dist/server.d.cts", "default": "./dist/server.cjs" }
+    }
+  },
+  "files": ["dist", "README.md"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "clean": "rimraf dist coverage"
+  },
+  "dependencies": {
+    "@bidikit/core": "workspace:*",
+    "@bidikit/react": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": { "optional": false }
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.12",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
