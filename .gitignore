@@ -1,5 +1,8 @@
 # BidiKit .gitignore
 
+# npm auth (never commit tokens)
+.npmrc
+
 # Dependencies
 node_modules/
 .pnp

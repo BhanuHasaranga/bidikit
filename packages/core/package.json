@@ -1,8 +1,18 @@
 {
   "name": "@bidikit/core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zero-dependency RTL/LTR engine — The missing layer for bidirectional web applications",
-  "keywords": ["rtl", "ltr", "bidi", "bidirectional", "i18n", "internationalization", "arabic", "hebrew", "direction"],
+  "keywords": [
+    "rtl",
+    "ltr",
+    "bidi",
+    "bidirectional",
+    "i18n",
+    "internationalization",
+    "arabic",
+    "hebrew",
+    "direction"
+  ],
   "license": "MIT",
   "author": "BhanuHasaranga",
   "repository": {
@@ -11,18 +21,30 @@
     "directory": "packages/core"
   },
   "homepage": "https://bidikit.dev",
-  "bugs": { "url": "https://github.com/BhanuHasaranga/bidikit/issues" },
+  "bugs": {
+    "url": "https://github.com/BhanuHasaranga/bidikit/issues"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
-      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
-  "files": ["dist", "README.md", "CHANGELOG.md"],
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",

@@ -1,6 +1,6 @@
 {
   "name": "bidikit-example-next-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "BidiKit example — Next.js 14 App Router with RTL/LTR support",
   "scripts": {

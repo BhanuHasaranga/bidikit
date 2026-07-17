@@ -1,8 +1,17 @@
 {
   "name": "@bidikit/icons",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Icon mirroring utilities for BidiKit — auto-flip directional icons in RTL",
-  "keywords": ["rtl", "ltr", "icons", "mirror", "bidi", "react", "lucide", "heroicons"],
+  "keywords": [
+    "rtl",
+    "ltr",
+    "icons",
+    "mirror",
+    "bidi",
+    "react",
+    "lucide",
+    "heroicons"
+  ],
   "license": "MIT",
   "author": "BhanuHasaranga",
   "type": "module",
@@ -11,11 +20,20 @@
   "types": "./dist/main.d.ts",
   "exports": {
     ".": {
-      "import": { "types": "./dist/main.d.ts", "default": "./dist/main.js" },
-      "require": { "types": "./dist/main.d.cts", "default": "./dist/main.cjs" }
+      "import": {
+        "types": "./dist/main.d.ts",
+        "default": "./dist/main.js"
+      },
+      "require": {
+        "types": "./dist/main.d.cts",
+        "default": "./dist/main.cjs"
+      }
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
@@ -33,7 +51,9 @@
     "react": ">=18.0.0"
   },
   "peerDependenciesMeta": {
-    "react": { "optional": true }
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

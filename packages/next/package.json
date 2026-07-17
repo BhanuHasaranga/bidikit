@@ -1,8 +1,18 @@
 {
   "name": "@bidikit/next",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Next.js integration for BidiKit — SSR, middleware, SEO, App Router support",
-  "keywords": ["rtl", "ltr", "nextjs", "next", "i18n", "ssr", "middleware", "seo", "direction"],
+  "keywords": [
+    "rtl",
+    "ltr",
+    "nextjs",
+    "next",
+    "i18n",
+    "ssr",
+    "middleware",
+    "seo",
+    "direction"
+  ],
   "license": "MIT",
   "author": "BhanuHasaranga",
   "repository": {
@@ -16,19 +26,40 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
-      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./middleware": {
-      "import": { "types": "./dist/middleware.d.ts", "default": "./dist/middleware.js" },
-      "require": { "types": "./dist/middleware.d.cts", "default": "./dist/middleware.cjs" }
+      "import": {
+        "types": "./dist/middleware.d.ts",
+        "default": "./dist/middleware.js"
+      },
+      "require": {
+        "types": "./dist/middleware.d.cts",
+        "default": "./dist/middleware.cjs"
+      }
     },
     "./server": {
-      "import": { "types": "./dist/server.d.ts", "default": "./dist/server.js" },
-      "require": { "types": "./dist/server.d.cts", "default": "./dist/server.cjs" }
+      "import": {
+        "types": "./dist/server.d.ts",
+        "default": "./dist/server.js"
+      },
+      "require": {
+        "types": "./dist/server.d.cts",
+        "default": "./dist/server.cjs"
+      }
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
@@ -48,7 +79,9 @@
     "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
-    "next": { "optional": false }
+    "next": {
+      "optional": false
+    }
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
